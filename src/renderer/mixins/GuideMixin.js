@@ -63,6 +63,7 @@ export default {
                 next: this.nextStep,
                 goTo: this.goToStep,
                 currentStep: this.getCurrentStep,
+                currentIndex: this.currentIndex,
                 setWalletRecoveryType: this.setWalletRecoveryType,
                 getWalletRecoveryType: this.getWalletRecoveryType,
                 setWalletIndexComplete: this.setWalletIndexComplete,

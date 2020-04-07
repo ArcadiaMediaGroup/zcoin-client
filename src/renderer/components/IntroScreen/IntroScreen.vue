@@ -143,7 +143,7 @@ export default {
             return classes.join(' ')
         },
         showLoadingWallet() {
-            return !this.walletLoaded && this.isLocked && this.walletExist
+            return !this.walletLoaded && this.walletExist && (this.isLocked || (!this.isLocked && this.currentIndex > 0))
         },
 
         isReadyInitialOrRestarting () {
@@ -151,8 +151,7 @@ export default {
         },
 
         showIntro () {
-            console.log('showIntro:', this.isReadyInitialOrRestarting, ', show intro:', this.showIntroScreen);
-            return this.isReadyInitialOrRestarting  && this.showIntroScreen
+            return this.isReadyInitialOrRestarting  && this.showIntroScreen && !this.showLoadingWallet
         },
 
         getActions () {
@@ -173,15 +172,15 @@ export default {
         },
 
         loadingMessage () {
-            if (this.isRestarting) {
+            if (this.isRunning || !this.walletLoaded) {
+                var postFix = this.walletLoaded? '':'. This might take a few minutes, depending on your transaction history';
+                return this.$t('overlay.loading.loading-wallet') + postFix
+            }
+            else if (this.isRestarting) {
                 return this.$t('overlay.loading.restarting-daemon')
             }
             else if (this.currentBlockHeight === undefined) {
                 return this.$t('overlay.loading.loading-blockchain')
-            }
-            else if (this.isRunning || !this.walletLoaded) {
-                var postFix = this.walletLoaded? '':'. This might take a few minutes, depending on your transaction history';
-                return this.$t('overlay.loading.loading-wallet') + postFix
             }
             else {
                 return this.$t('overlay.loading.initial')

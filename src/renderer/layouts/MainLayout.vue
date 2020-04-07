@@ -79,7 +79,8 @@ export default {
             showIntroScreen: 'App/showIntroScreen',
             showIncomingPaymentRequest: 'App/showIncomingPaymentRequest',
             hasOpenAppOverlay: 'App/hasOpenOverlay',
-            walletLoaded: 'Transactions/walletLoaded'
+            walletLoaded: 'Transactions/walletLoaded',
+            isLocked: 'ApiStatus/isLocked'
         }),
 
         // todo do some clean up and combine getters here
@@ -100,7 +101,7 @@ export default {
         },
 
         showIntro () {
-            return (this.showIntroScreen && !this.showConnectivityOverlay) || !this.walletLoaded
+            return (this.showIntroScreen && !this.showConnectivityOverlay) || !this.walletLoaded || !this.isLocked
         }
     },
 
